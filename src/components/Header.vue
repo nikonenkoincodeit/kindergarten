@@ -4,7 +4,11 @@
     :class="{ 'offcanvas-menu': showMobileMenu }"
     role="banner"
   >
-    <div class="container">
+    <div class="container cont-header">
+      <h1 class="logo-title">
+        Заклад дошкільної освіти "Ясла-садок №6 "Дзвіночок" Вільнянської міської
+        ради"
+      </h1>
       <div class="d-flex align-items-center">
         <nav class="site-navigation" role="navigation">
           <ul
@@ -75,5 +79,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.logo-title {
+  max-width: 200px;
+  text-align: center;
+  font-size: 16px;
+  color: #51be78;
+}
+.cont-header {
+  display: flex;
+  justify-content: space-between;
+}
 </style>

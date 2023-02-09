@@ -1463,3 +1463,17 @@ h5,
 a.router-link-active {
   color: #51be78 !important;
 }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.wrap-carousel {
+  overflow: hidden;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  max-height: 700px;
+}

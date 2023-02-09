@@ -1,12 +1,14 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
+  <div class="wrap-carousel">
+    <Carousel3 />
   </div>
 </template>
 
 <script>
+import Carousel3 from "../components/Carousel.vue";
+
 export default {
   name: "Home",
-  components: {},
+  components: { Carousel3 },
 };
 </script>
