@@ -1,12 +1,18 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
+import moduleNews from "./news";
 export default createStore({
   state: {
+    name: "Mango",
   },
-  mutations: {
+  mutations: {},
+  getters: {
+    getName(state) {
+      return state.name;
+    },
   },
-  actions: {
-  },
+  actions: {},
   modules: {
-  }
-})
+    moduleNews,
+  },
+});

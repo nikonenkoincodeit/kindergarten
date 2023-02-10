@@ -1464,6 +1464,11 @@ a.router-link-active {
   color: #51be78 !important;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 img {
   display: block;
   max-width: 100%;
