@@ -14,7 +14,19 @@
             :key="year"
             :id="year"
           >
-            <div class="item">{{ createNews(year) }}</div>
+            <ul class="list-news">
+              <li
+                class="list-news-item"
+                v-for="news in createNews(year)"
+                :key="news._id"
+                :data-news-id="news._id"
+              >
+                <h2 class="list-news-title">{{ news.title }}</h2>
+                <p class="list-news-description">
+                  {{ cutString(news.description, MAX_SIZE_STR) }}
+                </p>
+              </li>
+            </ul>
           </tab>
         </tabs>
       </div>
@@ -23,15 +35,18 @@
 </template>
 
 <script>
-import { computed, onMounted, ref, toRaw } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
 import { Tabs, Tab } from "vue3-tabs-component";
+import { cutString } from "../utils";
+
 export default {
   components: { Tabs, Tab },
   setup() {
     const store = useStore();
     let currentYear = ref(null);
+    const MAX_SIZE_STR = 200;
 
     const getNewsByYears = computed(() =>
       [...store.getters.getNewsByYears].sort((a, b) => b - a)
@@ -62,10 +77,13 @@ export default {
       tabChanged,
       getNewsByYears,
       createNews,
+      cutString,
+      MAX_SIZE_STR,
     };
   },
 };
 </script>
+
 <style lang="scss">
 .tabs-component {
   width: 100%;
@@ -91,6 +109,24 @@ export default {
     .tabs-component-tab-a {
       color: #51be78;
     }
+  }
+}
+
+.list-news {
+  padding: 20px 0;
+  &-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  &-title {
+    font-size: 18px;
+    color: #000;
+  }
+  &-description {
+    margin: 0;
   }
 }
 </style>
