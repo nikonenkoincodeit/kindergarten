@@ -30,6 +30,11 @@ const routes = [
     name: "DLearning",
     component: () => import("../views/DLearning.vue"),
   },
+  {
+    path: "/one-news",
+    name: "oneNews",
+    component: () => import("../views/oneNews.vue"),
+  },
 ];
 
 const router = createRouter({

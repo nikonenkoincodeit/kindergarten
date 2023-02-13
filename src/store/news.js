@@ -2,6 +2,7 @@ import { getData } from "../api/news";
 
 const news = {
   state: {
+    oneNews: [],
     newsByYears: [],
     arrayNewsByYears: [],
   },
@@ -11,6 +12,9 @@ const news = {
     },
     getArrayNewsByYears({ arrayNewsByYears }) {
       return arrayNewsByYears;
+    },
+    getOneNews({ oneNews }) {
+      return oneNews;
     },
   },
   mutations: {
@@ -28,6 +32,10 @@ const news = {
       const news = arrayNewsByYears.find((n) => n.year === year).news;
       news.push(...data);
     },
+    getOneNews({ oneNews }, data) {
+      oneNews.length = 0;
+      oneNews.push(data);
+    },
   },
   actions: {
     async getData({ commit }, path) {
@@ -42,6 +50,10 @@ const news = {
     async getDataByYear({ commit }, year) {
       const data = await getData("news?year=" + year);
       commit("addNewsByArray", { data, year });
+    },
+    async getDataNews({ commit }, id) {
+      const data = await getData("news/" + id);
+      commit("getOneNews", data);
     },
   },
 };

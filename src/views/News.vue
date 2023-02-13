@@ -20,6 +20,7 @@
                 v-for="news in createNews(year)"
                 :key="news._id"
                 :data-news-id="news._id"
+                @click="goToNewsPage(news._id)"
               >
                 <h2 class="list-news-title">{{ news.title }}</h2>
                 <p class="list-news-description">
@@ -35,7 +36,8 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 import { Tabs, Tab } from "vue3-tabs-component";
@@ -44,6 +46,7 @@ import { cutString } from "../utils";
 export default {
   components: { Tabs, Tab },
   setup() {
+    const router = useRouter();
     const store = useStore();
     let currentYear = ref(null);
     const MAX_SIZE_STR = 200;
@@ -69,9 +72,13 @@ export default {
         store.dispatch("getDataByYear", currentYear.value);
     };
 
-    onMounted(() => {
-      if (!getNewsByYears.value.length) store.dispatch("getData", "news/year");
-    });
+    const goToNewsPage = (id) => {
+      router.push({ query: { id }, name: "oneNews" });
+    };
+
+    // onMounted(() => {
+    if (!getNewsByYears.value.length) store.dispatch("getData", "news/year");
+    // });
 
     return {
       tabChanged,
@@ -79,6 +86,7 @@ export default {
       createNews,
       cutString,
       MAX_SIZE_STR,
+      goToNewsPage,
     };
   },
 };
